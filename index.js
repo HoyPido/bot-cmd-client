@@ -16,12 +16,16 @@ ws.on('open', function open() {
 });
 
 ws.on('message', function(data, flags){
-  console.log("HoyPido:", data);
+  console.log("\nHoyPido: ".bold, data, '\n');
 });
 
 rl.on('line', function(line) {
-  var msg_in = "Me: "+line;
-  console.log(msg_in.bold);
+	if(!line){
+		return;
+	};
+  
+  var msg_in = "\nMe: ".bold + line;
+  //console.log(msg_in);
   var message = {"text":line,"user":{"id":"pepe","profile":{"email":"fabri@tuosto.com"}}};
   ws.send(JSON.stringify(message));
 });
