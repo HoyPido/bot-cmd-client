@@ -1,7 +1,9 @@
 var server = 'localhost:5000'
 //var server = 'hoypido-slackbot.herokuapp.com'
 , WebSocket = require('ws')
+, fs = require('fs')
 , ws = new WebSocket('ws://'+server)
+, uuid = require('node-uuid')
 , colors = require('colors')
 , readline = require('readline')
 , marked = require('marked')
@@ -12,6 +14,26 @@ var server = 'localhost:5000'
   terminal: false
 });
 
+function get_user(){
+  try{
+    return JSON.parse(fs.readFileSync(process.env.HOME + '/.hoypidorc', 'utf-8'));
+  }catch(e){
+    return {
+      "id": uuid.v1(),
+      "profile":{
+        "email": process.env.USER + "@bot_cmd_client.com"
+      }
+    }
+  }
+}
+
+function save_user(user){
+  fs.writeFileSync(process.env.HOME + '/.hoypidorc', JSON.stringify(user), 'utf8');
+  return user;
+}
+
+// Init user
+user = save_user(get_user());
 function getMessage(str){
   try {
     var json = JSON.parse(str);
@@ -25,7 +47,7 @@ function getMarked(str){
   return marked(str).replace(/\n\n/g, '\n')
 }
 
-marked.setOptions({ 
+marked.setOptions({
   renderer: new TerminalRenderer({
     tableOptions: {
       style: {
@@ -47,11 +69,6 @@ rl.on('line', function(line) {
   if(!line){ return; };
   ws.send(JSON.stringify({
     "text":line,
-    "user":{
-      "id":"pepe",
-      "profile":{
-        "email":"fabri@tuosto.com"
-      }
-    }
+    "user": user
   }));
 });
