@@ -1,31 +1,28 @@
-var server = 'localhost:5000';
-// server = 'hoypido-slackbot.herokuapp.com';
-var WebSocket = require('ws');
-var colors = require('colors');
-var ws = new WebSocket('ws://'+server);
-var colors = require('colors');
-var readline = require('readline');
-var rl = readline.createInterface({
+var server = 'localhost:5000'
+//var server = 'hoypido-slackbot.herokuapp.com'
+, WebSocket = require('ws')
+, ws = new WebSocket('ws://'+server)
+, colors = require('colors')
+, readline = require('readline')
+, rl = readline.createInterface({
   input: process.stdin,
   output: null,
   terminal: false
 });
 
-ws.on('open', function open() {
-
-});
-
-ws.on('message', function(data, flags){
-  console.log("\nHoyPido: ".bold, data, '\n');
-});
+ws.on('open', function(){ console.log("\nHoyPido: ".bold, 'Hola capo', '\n'); });
+ws.on('close', function(){ console.log("\nHoyPido: ".bold, 'Se cayó la conexión :P intenta nuevamente', '\n'); process.exit(); });
+ws.on('message', function(data, flags){ console.log("\nHoyPido: ".bold, data, '\n'); });
 
 rl.on('line', function(line) {
-	if(!line){
-		return;
-	};
-  
-  var msg_in = "\nMe: ".bold + line;
-  //console.log(msg_in);
-  var message = {"text":line,"user":{"id":"pepe","profile":{"email":"fabri@tuosto.com"}}};
-  ws.send(JSON.stringify(message));
+  if(!line){ return; };
+  ws.send(JSON.stringify({
+    "text":line, 
+    "user":{
+      "id":"pepe",
+      "profile":{
+        "email":"fabri@tuosto.com"
+      }
+    }
+  }));
 });
