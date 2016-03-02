@@ -15,19 +15,32 @@ var server = 'localhost:5000'
 function getMessage(str){
   try {
     var json = JSON.parse(str);
-    return json.attachments[0].title
+    return '';
   } catch (e) {
     return str;
   }
 }
 
-marked.setOptions({ renderer: new TerminalRenderer() });
+function getMarked(str){
+  return marked(str).replace(/\n\n/g, '\n')
+}
 
-ws.on('open', function(){ console.log("\nHoyPido: ".bold, 'Hola capo', '\n'); });
-ws.on('close', function(){ console.log("\nHoyPido: ".bold, 'Se cayó la conexión :P intenta nuevamente', '\n'); process.exit(); });
+marked.setOptions({ 
+  renderer: new TerminalRenderer({
+    tableOptions: {
+      style: {
+        head: ['white', 'italic']
+      }
+    }
+  })
+});
+
+ws.on('open', function(){ console.log("HoyPido: ".bold, getMarked('Hola capo :smiley:'), '\n'); });
+ws.on('close', function(){ console.log("HoyPido: ".bold, getMarked('Se cayó la conexión :stuck_out_tongue: intenta nuevamente'), '\n'); process.exit(); });
 ws.on('message', function(data, flags){
   var message = getMessage(data);
-  console.log("\nHoyPido: ".bold, marked(message), '\n');
+  if(message)
+    console.log("HoyPido: ".bold, getMarked(message));
 });
 
 rl.on('line', function(line) {
