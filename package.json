@@ -1,5 +1,5 @@
 {
-  "name": "hoypido-cmd-client",
+  "name": "hoypido-cli",
   "version": "1.0.0",
   "description": "Bot client for HoyPido.com",
   "main": "index.js",
