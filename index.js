@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var server = 'localhost:5000'
-//var server = 'hoypido-slackbot.herokuapp.com'
+// var server = 'hoypido-slackbot.herokuapp.com'
 , WebSocket = require('ws')
 , fs = require('fs')
 , ws = new WebSocket('ws://'+server)
@@ -52,6 +52,7 @@ function getMarked(str){
 marked.setOptions({
   renderer: new TerminalRenderer({
     tableOptions: {
+      reflowText: true,
       style: {
         head: ['white', 'italic']
       }
