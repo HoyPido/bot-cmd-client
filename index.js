@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-// var server = 'localhost:5000'
-var server = 'hoypido-slackbot.herokuapp.com'
+var server = 'localhost:5000'
+//var server = 'hoypido-slackbot.herokuapp.com'
 , WebSocket = require('ws')
 , fs = require('fs')
 , ws = new WebSocket('ws://'+server)
@@ -60,7 +60,13 @@ marked.setOptions({
   })
 });
 
-ws.on('open', function(){ console.log("HoyPido: ".bold, getMarked('Hola capo :smiley:'), '\n'); });
+ws.on('open', function(){ 
+  //console.log("HoyPido: ".bold, getMarked('Hola capo :smiley:'), '\n');
+  ws.send(JSON.stringify({
+    "text": "hola, menu",
+    "user": user
+  }));
+});
 ws.on('close', function(){ console.log("HoyPido: ".bold, getMarked('Se cayó la conexión :stuck_out_tongue: intenta nuevamente'), '\n'); process.exit(); });
 ws.on('message', function(data, flags){
   var message = getMessage(data);
