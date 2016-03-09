@@ -60,7 +60,12 @@ marked.setOptions({
   })
 });
 
-ws.on('open', function(){ console.log("HoyPido: ".bold, getMarked('Hola capo :smiley:'), '\n'); });
+ws.on('open', function(){
+  ws.send(JSON.stringify({
+    "text":"pedir",
+    "user": user
+  }));
+});
 ws.on('close', function(){ console.log("HoyPido: ".bold, getMarked('Se cayó la conexión :stuck_out_tongue: intenta nuevamente'), '\n'); process.exit(); });
 ws.on('message', function(data, flags){
   var message = getMessage(data);
