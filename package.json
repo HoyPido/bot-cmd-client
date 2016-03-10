@@ -1,11 +1,11 @@
 {
   "name": "hoypido-cli",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Bot client for HoyPido.com",
   "main": "index.js",
   "readmeFilename": "README.md",
   "bin": {
-        "hoypido": "index.js"
+    "hoypido": "index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
