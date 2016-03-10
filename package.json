@@ -1,8 +1,9 @@
 {
   "name": "hoypido-cli",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Bot client for HoyPido.com",
   "main": "index.js",
+  "readmeFilename": "README.md",
   "bin": {
         "hoypido": "index.js"
   },
