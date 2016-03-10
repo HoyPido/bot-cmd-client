@@ -2,7 +2,7 @@
   "name": "hoypido-cli",
   "version": "1.0.5",
   "description": "Bot client for HoyPido.com",
-  "main": "index.js"
+  "main": "index.js",
   "bin": {
     "hoypido": "index.js"
   },
