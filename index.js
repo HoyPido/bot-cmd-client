@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-// var server = 'localhost:5000'
+// var server = 'localhost:5001'
 var server = 'hoypido-slackbot.herokuapp.com'
 , WebSocket = require('ws')
 , fs = require('fs')
@@ -62,7 +62,7 @@ marked.setOptions({
 
 ws.on('open', function(){
   ws.send(JSON.stringify({
-    "text":"pedir",
+    "text": "pedir",
     "user": user
   }));
 });
