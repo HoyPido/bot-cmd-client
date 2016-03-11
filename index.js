@@ -65,6 +65,13 @@ ws.on('open', function(){
     "text": "pedir",
     "user": user
   }));
+
+  setInterval(function(){
+    ws.send(JSON.stringify({
+      type: 'ping'
+    }));
+  }, 1000);
+
 });
 ws.on('close', function(){ console.log("HoyPido: ".bold, getMarked('Se cayó la conexión :stuck_out_tongue: intenta nuevamente'), '\n'); process.exit(); });
 ws.on('message', function(data, flags){
