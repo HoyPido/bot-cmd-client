@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
-// var server = 'localhost:5001'
-var server = 'hoypido-slackbot.herokuapp.com'
+var server = 'localhost:5001'
+// var server = 'hoypido-slackbot.herokuapp.com'
+
 , WebSocket = require('ws')
 , fs = require('fs')
 , ws = new WebSocket('ws://'+server)
@@ -46,7 +47,7 @@ function getMessage(str){
 }
 
 function getMarked(str){
-  return marked(str).replace(/\n\n/g, '\n')
+  return marked(str).replace(/\n\n/g, '\n').replace(/<br>/g, '\n')
 }
 
 marked.setOptions({
