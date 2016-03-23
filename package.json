@@ -1,6 +1,6 @@
 {
   "name": "hoypido-cli",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "description": "Bot client for HoyPido.com",
   "main": "index.js",
   "bin": {
