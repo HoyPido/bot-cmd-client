@@ -1,10 +1,5 @@
 #!/usr/bin/env node
 
-<<<<<<< HEAD
-//var server = 'localhost:5001'
-=======
-// var server = 'localhost:5001'
->>>>>>> e3c6c63f5722aadd0afadb4a63ef8d4902c7906b
 var server = 'hoypido-slackbot.herokuapp.com'
 
 , WebSocket = require('ws')
